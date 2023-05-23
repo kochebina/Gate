@@ -6,14 +6,12 @@ of the GNU Lesser General  Public Licence (LGPL)
 See LICENSE.md for further details
 ----------------------*/
 
-// OK GND 2022
-// MJS 2023
-
-//Contact : Mohamed-Jordan Soumano mjsoumano@yahoo.com
-/*
+/*!
   The purpose of this class is to help to create new users digitizer module(DM).
   Please, check GateTimeDelay.cc for more details
-  */
+  
+  Last modification (Adaptation to GND): May 2023 by Mohamed-Jordan Soumano mjsoumano@yahoo.com
+*/
 
 #include "GateTimeDelayMessenger.hh"
 #include "GateTimeDelay.hh"

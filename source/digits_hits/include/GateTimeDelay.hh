@@ -6,18 +6,16 @@ of the GNU Lesser General  Public Licence (LGPL)
 See LICENSE.md for further details
 ----------------------*/
 
-// OK GND 2022
-//MJS 2023
-
-//Contact : Mohamed-Jordan Soumano mjsoumano@yahoo.com
 /*!
   \class  GateTimeDelay
 
   Digitizer module for simulating a TimeDelay
   The user can choose a specific TimeDelay for each tracked volume.
-
-    \sa GateTimeDelay, GateTimeDelayMessenger
+  \sa GateTimeDelay, GateTimeDelayMessenger
+    
+  Last modification (Adaptation to GND): May 2023 by Mohamed-Jordan Soumano mjsoumano@yahoo.com
 */
+
 
 #ifndef GateTimeDelay_h
 #define GateTimeDelay_h 1
