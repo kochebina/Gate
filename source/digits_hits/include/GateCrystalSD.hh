@@ -45,7 +45,12 @@ typedef GateSystemList::const_iterator GateSystemConstIterator;
       hit collection.
 */
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
-//    Last modification for GND in Feb 2023 by Olga.Kochebina@cea.fr for NewGateDigitizerOld
+//    Last modification for GND in Feb 2023 by Olga.Kochebina@cea.fr for NewGateDigitizer
+//    May 2023: O. Kochebina: variables for ComptonCamera (from GateComptonCameraActor) are added: Ef, Ei, nCurrentCompt, nCurrentConv, nCurrentRayl, sourceEnergy, source PDG
+//		       Important!!! Some of functionalities where not reimplemented!!!
+//					They are (from  GateComptonCameraActorMessenger): /specifysourceParentID and /parentIDFileName
+
+
 
 class GateCrystalSD : public G4VSensitiveDetector
 {
@@ -93,14 +98,13 @@ class GateCrystalSD : public G4VSensitiveDetector
 
       static GateCrystalSD*  theSD;
 
-      double Ei,Ef;
-      G4int nCrystalConv;
-      G4int nCrystalCompt;
-      G4int nCrystalRayl;
-      G4double Ef_oldPrimary;
+      G4bool m_IsNewEvent;
+      G4double m_Ef_oldPrimary;
+      G4bool mParentIDSpecificationFlag;
 
-      G4double sourceEnergy;
-      G4int sourcePDG;
+      G4double m_sourceEnergy;
+      G4int  m_sourcePDG;
+
 
 };
 

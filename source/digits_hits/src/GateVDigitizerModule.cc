@@ -59,11 +59,18 @@ GateVDigitizerModule::~GateVDigitizerModule()
 
 void GateVDigitizerModule::Describe(size_t indent)
 {
+	G4cout<<"GateVDigitizerModule::Describe"<<G4endl;
   GateClockDependent::Describe(indent);
   G4cout << GateTools::Indent(indent) << "Attached to:        '" << m_digitizer->GetObjectName() << "'\n";
   G4cout << GateTools::Indent(indent) << "Output:             '" << GetObjectName() << "'\n";
   DescribeMyself(indent);
 }
+
+void GateVDigitizerModule::DescribeMyself(size_t indent)
+{
+;
+}
+
 
 //////////////////
 void GateVDigitizerModule::InputCollectionID()
@@ -257,9 +264,9 @@ GateDigi* GateVDigitizerModule::MergePositionEnergyWin(GateDigi *right, GateDigi
     	output->m_globalPos =   right->m_globalPos;
 
     }
-    G4cout<<output->m_energy <<" + "<< right->m_energy<<G4endl;
+    //G4cout<<output->m_energy <<" + "<< right->m_energy<<G4endl;
     output->m_energy = output->m_energy + right->m_energy;
-    G4cout<<output->m_energy <<G4endl;
+    //G4cout<<output->m_energy <<G4endl;
 
     // # of compton process: store the max nb
     if ( right->m_nPhantomCompton > output->m_nPhantomCompton )

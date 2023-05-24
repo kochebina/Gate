@@ -106,7 +106,9 @@ GateToRoot::GateToRoot(const G4String &name, GateOutputMgr *outputMgr, DigiMode 
 	, m_rootMessenger(0)
 {
 
-	G4cout<<"GateToRoot::GateToRoot "<<G4endl;
+
+	//G4cout<<"GateToRoot::GateToRoot "<<G4endl;
+
     /*
       if (digiMode==kofflineMode)
       m_fileName="digigate";
@@ -314,7 +316,11 @@ void GateToRoot::BookBeginOfRun() {
 	  }
 
     for (size_t i = 0; i < m_outputChannelList.size(); ++i)
+    {
+    	 m_outputChannelList[i]->SetCCFlag(GetRootCCFlag());
         m_outputChannelList[i]->Book();
+
+    }
 
 }
 //--------------------------------------------------------------------------
@@ -1201,8 +1207,11 @@ void GateToRoot::RecordVoxels(GateVGeometryVoxelStore *voxelStore) {
 
 //--------------------------------------------------------------------------
 void GateToRoot::RegisterNewSingleDigiCollection(const G4String &aCollectionName, G4bool outputFlag) {
-    SingleOutputChannel *singleOutputChannel =
-            new SingleOutputChannel(aCollectionName, outputFlag, m_rootCCFlag);
+
+
+	SingleOutputChannel *singleOutputChannel =
+            new SingleOutputChannel(aCollectionName, outputFlag);
+
     m_outputChannelList.push_back(singleOutputChannel);
 
     //G4cout << " GateToRoot::RegisterNewSingleDigiCollection outputFlag = " <<aCollectionName <<outputFlag<< Gateendl;

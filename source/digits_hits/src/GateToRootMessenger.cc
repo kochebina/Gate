@@ -56,12 +56,22 @@ GateToRootMessenger::GateToRootMessenger(GateToRoot* gateToRoot)
   cmdName = GetDirectoryName()+"setRootSinglesFlag";
   RootSinglesCmd = new G4UIcmdWithABool(cmdName,this);
   RootSinglesCmd->SetGuidance("To get error if you use old command");
-  RootSinglesCmd->SetGuidance("1. true/false");
+
+  //RootSinglesCmd->SetGuidance("1. true/false");
+
 
   cmdName = GetDirectoryName()+"CCoutput";
   RootCCCmd = new G4UIcmdWithABool(cmdName,this);
   RootCCCmd->SetGuidance("Set the flag for Hits in case of CC ROOT output");
-  RootCCCmd->SetGuidance("1. true/false");
+
+ // RootCCCmd->SetGuidance("1. true/false");
+
+
+  cmdName = GetDirectoryName()+"CCoutput/specifysourceParentID";
+  RootCCSourceParentIDSpecificationCmd = new G4UIcmdWithABool(cmdName,this);
+  RootCCSourceParentIDSpecificationCmd->SetGuidance("By deflaut set to zero and parentID=0 particles are considered to register sourceEkine and sourcePDG information");
+ // RootCCSourceParentIDSpecificationCmd->SetGuidance("1. true/false");
+
 
   //OK GND 2022
 
@@ -122,6 +132,9 @@ GateToRootMessenger::~GateToRootMessenger()
   delete ResetCmd;
   //delete RootSinglesCmd;
   delete RootCCCmd;
+
+  delete RootCCSourceParentIDSpecificationCmd;
+
   delete RootHitCmd;
   delete RootNtupleCmd;
   delete RootOpticalCmd;
@@ -149,7 +162,20 @@ void GateToRootMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     else if (command == RootCCCmd) {
         m_gateToRoot->SetRootCCFlag(RootCCCmd->GetNewBoolValue(newValue));
 
-  } else if (command == RootSinglesCmd) {
+
+  }
+
+    else if (command == RootCCSourceParentIDSpecificationCmd) {
+    	m_gateToRoot->SetRootCCSourceParentIDSpecificationFlag(RootCCSourceParentIDSpecificationCmd->GetNewBoolValue(newValue));
+
+      }
+
+
+
+
+
+    else if (command == RootSinglesCmd) {
+
 
 	  //OK GND backward compatibility
 	GateDigitizerMgr* digitizerMgr = GateDigitizerMgr::GetInstance();
