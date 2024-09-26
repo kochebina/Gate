@@ -120,52 +120,14 @@ void GateToProjectionSetMessenger::SetNewValue(G4UIcommand* command,G4String new
 
   else if (command == SetInputDataCmd)
     {
-	  G4String newName;
-    	//OK GND 2022
-        GateDigitizerMgr* digitizerMgr=GateDigitizerMgr::GetInstance();
 
-        for(size_t j=0; j<digitizerMgr->m_SDlist.size();j++)
-        {
-        	if(G4StrUtil::contains(newValue,digitizerMgr->m_SDlist[j]->GetName()))
-        		newName=newValue;
-        	else
-        		newName=newValue+"_"+digitizerMgr->m_SDlist[j]->GetName();
-
-
-        		GateSinglesDigitizer* digitizer=digitizerMgr->FindSinglesDigitizer(newName);
-        		if(digitizer)
-        			digitizer->m_recordFlag=true;
-
-
-        }
-    	digitizerMgr->m_recordSingles=true;
-
-
-  	  m_gateToProjectionSet->SetInputDataName(newName);
-
+	  m_gateToProjectionSet->SetInputDataName(newValue);
     }
 
   else if (command == AddInputDataCmd)
-    { 	  G4String newName;
-	//OK GND 2022
-    GateDigitizerMgr* digitizerMgr=GateDigitizerMgr::GetInstance();
-
-    for(size_t j=0; j<digitizerMgr->m_SDlist.size();j++)
     {
-    	if(G4StrUtil::contains(newValue,digitizerMgr->m_SDlist[j]->GetName()) )
-    		newName=newValue;
-    	else
-    		newName=newValue+"_"+digitizerMgr->m_SDlist[j]->GetName();
-
-
-    		GateSinglesDigitizer* digitizer=digitizerMgr->FindSinglesDigitizer(newName);
-    		if(digitizer)
-    			digitizer->m_recordFlag=true;
-    	}
-
-
-	  m_gateToProjectionSet->AddInputDataName(newName); }
-
+    m_gateToProjectionSet->AddInputDataName(newValue);
+    }
   /*
    * Commands of the mother overloaded to have impact on the GateToInterfile class too
    */

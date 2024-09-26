@@ -326,11 +326,7 @@ void GateToProjectionSet::RecordBeginOfAcquisition()
   G4DigiManager * fDM = G4DigiManager::GetDMpointer();
   GateDigitizerMgr* theDigitizerMgr = GateDigitizerMgr::GetInstance();
 
-  	  if(theDigitizerMgr->m_SDlist.size()>1) //TODO OK GND  adapt for multiSDs
-  		  {
-		  GateError("***ERROR*** Multiple Sensitive detectors approach was not yet implemented for the /projection/ output. Please, contact olga.kochebina [a] cea.fr if your need this functionality to be added. \n");
 
-  		  }
  for (std::vector<G4String>::iterator i_inputChannelName = m_inputDataChannelList.begin();
        i_inputChannelName != m_inputDataChannelList.end(); ++i_inputChannelName)
     {
@@ -341,8 +337,10 @@ void GateToProjectionSet::RecordBeginOfAcquisition()
 	  {
 		  GateSinglesDigitizer* aDigitizer;
 		  aDigitizer = dynamic_cast<GateSinglesDigitizer*>(theDigitizerMgr->FindSinglesDigitizer(*i_inputChannelName));
+
 		  for (long unsigned int i =0; i<aDigitizer->m_DMlist.size(); i++)
 		  {
+			  G4cout<<aDigitizer->m_DMlist[i]->GetName()+"/"+*i_inputChannelName<<G4endl;
 			  m_inputDataChannelIDList.push_back(fDM->GetDigiCollectionID(aDigitizer->m_DMlist[i]->GetName()+"/"+*i_inputChannelName));
 		  }
 	  }
@@ -354,17 +352,13 @@ void GateToProjectionSet::RecordBeginOfAcquisition()
 
  if(m_inputDataChannelList.size()==0) //no digitizer set by user
   {
-	  if(theDigitizerMgr->m_SDlist.size()==1) //TODO OK GND  adapt for multiSDs
-		  {
-		  m_inputDataChannelIDList.push_back(0);//fDM->GetDigiCollectionID("DigiInit/Singles_"+theDigitizerMgr->m_SDlist[0]->GetName()));
-		  m_inputDataChannelList.push_back("Singles_"+theDigitizerMgr->m_SDlist[0]->GetName());
+
+	 for(int i = 0; i< theDigitizerMgr->m_SDlist.size();i++)
+	 {
+		  m_inputDataChannelIDList.push_back(i);
+		  m_inputDataChannelList.push_back("Singles_"+theDigitizerMgr->m_SDlist[i]->GetName());
 
 		  }
-	  else
-	  {
-		  GateError("***ERROR*** Multiple Sensitive detectors approach was not yet implemented for the /projection/ output. Please, contact olga.kochebina [a] cea.fr if your need this functionality to be added. \n");
-
-	  }
   }
 
 
